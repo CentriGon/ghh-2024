@@ -1,23 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
+import { auth, googleProvider, db } from "./config/firebase"
+import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
+import { doc, getDoc } from 'firebase/firestore';
 
 function App() {
+
+  const authenticateHandler = async () => {
+       
+    try {
+      await signInWithPopup(auth, googleProvider)
+  }
+  catch (e) {
+      console.log(e.message)
+  }
+}
+
+const getDocTest = async () => {
+  const docRef = doc(db, 'test_section', 'RKEu4IdCAClKA0BpgmcU');
+  const docSnap = await getDoc(docRef).then((data) => {
+    console.log(data)
+  });
+
+}
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={authenticateHandler}>
+        Hello
+      </button>
+
+      <button onClick={getDocTest}>
+        click
+      </button>
     </div>
   );
 }

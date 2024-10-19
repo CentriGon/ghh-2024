@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Radley:ital@0;1&display=swap');
+
+.hero-page {
+    font-family: "Radley";
+}
+
+
+.hero-page {
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.outer-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    height:85%;
+    background-color: #232D4B
+}
+
+.hero-text {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-text > h1 {
+    font-size: 60px;
+    margin-bottom: 0px;
+}
+
+.hero-text > p {
+    font-size: 30px;
+    margin-top: 0px;
+}
+
+.bottom-box {
+    width:100%;
+    height:15%;
+    background-color: #F84C1E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-box p {
+    margin: 0px;
+    font-size: 20px;
+}
+
+.hero-text > button {
+    background-color: #F84C1E;
+    font-size: 20px;
+    padding: 12px 30px 12px 30px;
+    border-radius: 20px;
+    transition: all 0.1s linear;
+}
+
+.hero-text > button:hover {
+    transform: scale(1.2);
+}
