@@ -9,8 +9,15 @@ export const DayCard = (props) => {
 
     return <div className="day-card">
         <div className="deco-bar"></div>
-        <h1> Meal Plan for: 09/11/2001 </h1>
-        <h3> Ohill Dining Hall</h3>
-        <p> Calories: 2001 </p>
+        <div className="text">
+            <h1> Meal Plan for {props.date} </h1>
+            <h3> {props.diningHall}</h3>
+            <p> Calories: {props.calories} </p>
+            <div className="button-cont">
+                <button>Edit</button>
+                <button>Delete </button>
+            </div>
+            
+        </div>
     </div>
 }
