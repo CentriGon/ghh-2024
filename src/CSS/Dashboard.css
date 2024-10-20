@@ -116,6 +116,6 @@
     height: 100vh;
     background-color: #000000ad;
     display: flex;
-    align-items: center;
+
     justify-content: center;
 }

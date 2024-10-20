@@ -8,9 +8,7 @@ import { FoodTab } from "./FoodTab"
 
 export const MealTab = (props) => {
 
-    useEffect(() => {
-        console.log(props)
-    }, [props])
+
     const [isVisible, setIsVisible] = useState(false)
 
     if (!props.foods) {
@@ -26,7 +24,7 @@ export const MealTab = (props) => {
         </div>
         {isVisible && (
             <div>
-                <FoodTab foodName="hamburger"/>
+
             </div>
         )}
         
@@ -45,12 +43,12 @@ export const MealTab = (props) => {
                 else{
                     setIsVisible(true)}
             }}> ^ </button>
+            
         </div>
         {isVisible && (
             <div>
-                <p> {props.foods.products[0].name}</p>
                 {props.foods.products.map((item, index) => {
-                    return <FoodTab foodName={item.name} healthInfo={item.healthInfo} location={item.location} description={item.description} />
+                    return item.healthInfo[0].Value ? <FoodTab foodName={item.name} healthInfo={item.healthInfo} location={item.location} description={item.description} setSelectedFoods={props.setSelectedFoods} fullFood={item}/> : null;
                 })}
             </div>
         )}
