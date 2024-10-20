@@ -1,0 +1,10 @@
+services:
+  - type: web  
+    name: my-web-server 
+    env: node  
+    plan: free  
+    buildCommand: npm install  
+    startCommand: node test.js 
+    autoDeploy: true  
+    repo: https://github.com/CentriGon/ghh-2024  
+    branch: main  # Specify the branch from which to deploy (usually 'main' or 'master').
