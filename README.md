@@ -1,3 +1,7 @@
+The server that provides the information for the search function spins down after 15 minutes of inactivity, and usually takes 50 seconds to spin back up. If the search function is not working properly, this may be why.
+
+URL: https://ghh-2024.web.app/
+
 Submission for Ellie Kim, Aaron Nile, Noor Nile for GHH 2024
 
 If you try to download this repository on your computer, the application will most likely through an error,

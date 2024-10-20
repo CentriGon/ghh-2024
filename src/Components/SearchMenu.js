@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth"
 import "../CSS/MenuStyle.css"
 import { NutrientBar } from "./NutrientInfoBar"
 import { useNavigate } from "react-router-dom"
+import isLoadingIcon from "../images/loadingIcon.gif"
 
 
 export const SearchMenu = (props) => {
@@ -90,6 +91,7 @@ export const SearchMenu = (props) => {
         code: 695,
         name: "Ohill Dining Hall"
     })
+    const [isLoading, setIsLoading] = useState(false)
 
 
     //fetches the nutrtional preferences for the user if they exist
@@ -188,11 +190,13 @@ export const SearchMenu = (props) => {
 
         console.log(diningLocation.code)
 
-        let arr = [[await fetcher(`http://localhost:5000/api/menu?location=${diningLocation.code}&date=${selectedDate}&period=${1421}`), "Breakfast"]]
-        arr.push([await fetcher(`http://localhost:5000/api/menu?location=${diningLocation.code}&date=${selectedDate}&period=${1422}`), "All day"])
-        arr.push([await fetcher(`http://localhost:5000/api/menu?location=${diningLocation.code}&date=${selectedDate}&period=${1423}`), "Lunch"])
-        arr.push([await fetcher(`http://localhost:5000/api/menu?location=${diningLocation.code}&date=${selectedDate}&period=${1424}`), "Dinner"])
+        setIsLoading(true)
+        let arr = [[await fetcher(`https://my-web-server-3zzi.onrender.com/api/menu?location=${diningLocation.code}&date=${selectedDate}&period=${1421}`), "Breakfast"]]
+        arr.push([await fetcher(`https://my-web-server-3zzi.onrender.com/api/menu?location=${diningLocation.code}&date=${selectedDate}&period=${1422}`), "All day"])
+        arr.push([await fetcher(`https://my-web-server-3zzi.onrender.com/api/menu?location=${diningLocation.code}&date=${selectedDate}&period=${1423}`), "Lunch"])
+        arr.push([await fetcher(`https://my-web-server-3zzi.onrender.com/api/menu?location=${diningLocation.code}&date=${selectedDate}&period=${1424}`), "Dinner"])
         
+        setIsLoading(false)
         let arra = null;
         for (let i = 0 ; i < arr.length; i++) {
             if (arr[i][0])
@@ -380,7 +384,8 @@ export const SearchMenu = (props) => {
             {foodInfo[2].products.length > 0 &&  <MealTab mealType="Dinner" foods={foodInfo[2]} food={foodInfo} setSelectedFoods={[selectedFoods, setSelectedFoods]} isEditAble={isEditAble}/>}
             {foodInfo[3].products.length > 0 &&  <MealTab mealType="Brunch" foods={foodInfo[3]} food={foodInfo} setSelectedFoods={[selectedFoods, setSelectedFoods]} isEditAble={isEditAble}/>}
             {foodInfo[4].products.length > 0 &&  <MealTab mealType="All day" foods={foodInfo[4]} food={foodInfo} setSelectedFoods={[selectedFoods, setSelectedFoods]} isEditAble={isEditAble}/>}
-            {(!foodInfo[0].products.length && !foodInfo[1].products.length && !foodInfo[2].products.length && !foodInfo[3].products.length && !foodInfo[4].products.length) && <h2> Try Searching for a specific date</h2>}
+            {(!foodInfo[0].products.length && !foodInfo[1].products.length && !foodInfo[2].products.length && !foodInfo[3].products.length && !foodInfo[4].products.length && !isLoading) && <h2> Try Searching for a specific date</h2>}
+            {isLoading && <img src={isLoadingIcon} className="loading-icon" />}
         </div>}
         {
             (props.mode == "edit" || props.mode == "edit-info") &&<button className="submit-button-f"onClick={(e) => {

@@ -61,3 +61,93 @@
 .search-bar > button > img:hover {
     transform: scale(1.05);
 }
+
+
+@media (max-width: 1200px) {
+    .outer-box > img {
+        width: 50%;
+    }
+}
+
+@media(max-width: 800px) {
+    .outer-box {
+        flex-direction: column-reverse;
+    }
+
+    .outer-box > img {
+        width: 80%;
+    }
+
+    .top-nav-bar > h1 {
+        display: none;
+    }
+
+    .top-nav-bar {
+        height:10vh
+    }
+
+    .cards {
+        margin-top: 220px;
+    }
+
+    .top-bar > h1 {
+        display: none;
+    }
+
+    
+}
+
+@media (max-width: 600px) {
+    .bottom-box {
+        display: none;
+    }
+    .outer-box,
+    .outer-o-box {
+        height: 100%
+    }
+    .hero-text > h1,
+    .outer-o-box > h1 {
+        font-size: 10vw
+    }
+
+    .hero-text > p {
+        font-size: 4vw;
+    }
+
+    #date-search {
+        width: 70%;
+    }
+
+    .available-additions > .meal-tab {
+        margin-left: 10px;
+    }
+
+    .main-section {
+        padding: 10px;
+    }
+
+    .cards > button {
+        margin-left: -20px;
+    }
+
+    .cards { 
+        gap: 20px;
+    }
+}
+
+.change-nut .nut-input > input {
+    border: 2px solid black;
+
+}
+
+.loading-icon {
+    width: 150px;
+}
+
+.food-tab > .header {
+    padding: 10px;
+}
+
+.change-nut {
+    overflow-y: scrol;
+}
