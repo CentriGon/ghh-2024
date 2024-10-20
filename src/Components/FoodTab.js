@@ -9,6 +9,7 @@ export const FoodTab = (props) => {
     const [isVisible, setIsVisible] = useState(false)
     const [shouldAdd, setShouldAdd] = useState("Add to Plan")
 
+    //checks to see if the food is already on the persons planned meal plan, and if it is, allow them to remove it.
     useEffect(() => {
         let obje = props.setSelectedFoods[0]
         let obje2 = obje.find(item => item.period == props.fullFood.period)
@@ -28,32 +29,29 @@ export const FoodTab = (props) => {
 
     }, [props])
 
+
+    //handles adding it to the planned meal plan. if its already there, this button will remove it
     const addHandler = () => {
     
         let obje = props.setSelectedFoods[0];
         let obje2 = obje.find(item => item.period === props.fullFood.period);
 
-        // Create a new array from obje2.products
         let array = [...obje2.products];
 
-        // Find the index of the item in the array
         let itemIndex = array.findIndex(item => item.name === props.foodName);
 
-        // If the item exists, remove it, otherwise add it
         if (itemIndex !== -1) {
-            array.splice(itemIndex, 1);  // Remove the item if it exists
+            array.splice(itemIndex, 1); 
         } else {
-            array.push(props.fullFood);  // Add the item if it doesn't exist
+            array.push(props.fullFood);  
         }
 
-        // Update the original obje with the modified products array
         obje.forEach((element, index) => {
             if (element.period === props.fullFood.period) {
                 obje[index].products = array;
             }
         });
 
-        // Create a new copy of obje and update the state
         let newob = [...obje];
         props.setSelectedFoods[1](newob);
     }

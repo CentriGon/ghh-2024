@@ -11,6 +11,7 @@ export const MealTab = (props) => {
 
     const [isVisible, setIsVisible] = useState(false)
 
+    //if the props.foods value is not there, it means that no items are in the meal tab, so it is not loaded in.
     if (!props.foods) {
         return <div className="meal-tab">
         <div className="header">
@@ -39,6 +40,7 @@ export const MealTab = (props) => {
     }
 
 
+    //otherwise, it loads in the values
     return <div className="meal-tab">
         <div className="header">
             <h2> {props.mealType}</h2>
@@ -61,13 +63,7 @@ export const MealTab = (props) => {
                 {props.foods.products.map((item, index) => {
                     return item.healthInfo[0].Value ? <FoodTab key={index} foodName={item.name} healthInfo={item.healthInfo} location={item.location} description={item.description} setSelectedFoods={props.setSelectedFoods} fullFood={item} isEditAble={props.isEditAble}/> : null;
                 })}
-                {() => {
-                    
-                    if (!props.foods.products.length) {
-                        console.log(props.foods.products)
-                        return <h1> No food</h1>
-                    }
-                }}
+                {!props.foods.products.length && <h1> No food</h1>}
             </div>
         )}
         

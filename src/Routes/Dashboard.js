@@ -6,6 +6,7 @@ import { DayCard } from "../Components/DayCard"
 import { useNavigate } from "react-router-dom"
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { SearchMenu } from "../Components/SearchMenu"
+import { ChangeNutrtionalValues } from "../Components/ChangeNut"
 
 export const Dashboard = () => {
 
@@ -14,9 +15,11 @@ export const Dashboard = () => {
     const [selectedInfo, setSelectedInfo] = useState(null);
     const [fetchedResources, setFetchedResources] = useState([])
     const [menuMode, setMenuMode] = useState("edit")
+    const [preferenceIsOpen, setPreferenceIsOpen] = useState(false)
 
     const navigate = useNavigate()
 
+    //checks to see if the user has any saved meals stored in the database
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (!user) {
@@ -36,7 +39,7 @@ export const Dashboard = () => {
                         ...doc.data(),
                     }));
                     
-                    console.log(documents);
+                    
                     setFetchedResources(documents)
                 } catch (error) {
                     console.error('Error retrieving documents:', error);
@@ -46,24 +49,30 @@ export const Dashboard = () => {
 
     }, [])
 
-    useEffect(() => {
-        console.log(fetchedResources)
-    }, [fetchedResources])
-
     return <div className="dashboard">
-        {menuIsOpen && (
+        {(menuIsOpen && (
                 <div className="overlay" onClick={(e) => {
+                    setMenuIsOpen(false)
+                    setPreferenceIsOpen(false)
                     e.stopPropagation()
                 }}>
                     <SearchMenu mode={menuMode} selectedItems={selectedInfo} setMenuIsOpen={setMenuIsOpen}/>
                 </div>
-        )}
+        )) || (preferenceIsOpen && <div className="overlay" onClick={(e) => {
+            setMenuIsOpen(false)
+            setPreferenceIsOpen(false)
+            e.stopPropagation()
+        }}>
+            <ChangeNutrtionalValues />
+        </div>)}
         <div className="top-nav-bar">
             <h2>HoosNutriPlan</h2>
             <h1>Personalized Meal Plan</h1>
             <h4> Welcome, {name}! </h4>
         </div>
+        
         <div className="main-section">
+        <button className="pref-button" onClick={() => setPreferenceIsOpen(true)}> Change Nutritional Goals</button>
             <div className="cards">
                 {fetchedResources.map((item) => {
                     return <DayCard date={item.date} setMenuMode={setMenuMode} setMenuIsOpen={setMenuIsOpen} setSelectedInfo={setSelectedInfo} diningHall={item.diningHall} fullInfo={item} calories={item.nutrient_values.calories} />
@@ -79,7 +88,6 @@ export const Dashboard = () => {
                         setMenuMode("edit")
                         setSelectedInfo(null)
                         setMenuIsOpen(true)
-                        console.log('clicked')
 
                     }
                 }>

@@ -8,8 +8,10 @@ import { getFirestore, collection, query, where, getDocs, deleteDoc, doc } from 
 
 export const DayCard = (props) => {
 
+    //used for navigating around the web pages
     const navigate = useNavigate()
 
+    //deletes the info when the button is pressed, uses firebase api
     const deleteInfo = async () => {
         try {
             const mealsRef = collection(db, 'meals_saved');
@@ -32,6 +34,7 @@ export const DayCard = (props) => {
         }
     }
 
+    //change the settings of menu so that it is in view mode and they can see the values of the current meal plans
     const viewHandler = () => {
         console.log(props.fullInfo)
         props.setSelectedInfo(props.fullInfo.meal_plan)

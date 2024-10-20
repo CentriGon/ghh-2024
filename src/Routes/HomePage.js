@@ -6,6 +6,7 @@ export const HomePage = () => {
     const navigate = useNavigate();
 
 
+    //sends the user to login page
     const handleLoginSwitch = () => {
         navigate("/login")
     }

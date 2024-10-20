@@ -4,6 +4,7 @@ import { auth, googleProvider, db } from "./config/firebase"
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { doc, getDoc } from 'firebase/firestore';
 
+//this file was not used, just here for reference on how firebase api works
 function App() {
 
   const authenticateHandler = async () => {

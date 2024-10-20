@@ -9,6 +9,7 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
 
+    //authenticates the user using firebase auth
     const authenticateHandler = async () => {
        
         try {
