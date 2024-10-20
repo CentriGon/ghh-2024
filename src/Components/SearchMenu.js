@@ -7,9 +7,12 @@ import { auth, db } from "../config/firebase"
 import { getDocs, collection, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import "../CSS/MenuStyle.css"
 import { NutrientBar } from "./NutrientInfoBar"
+import { useNavigate } from "react-router-dom"
 
 
 export const SearchMenu = (props) => {
+
+    const navigate = useNavigate()
 
     const [foodInfo, setFoodInfo] = useState([]);
     const [selectedFoods, setSelectedFoods] = useState(() => {
@@ -105,7 +108,10 @@ export const SearchMenu = (props) => {
               nutrient_values: selectedNutrInfo,
               date: selectedDate,
               diningHall: "Ohill Dining Hall"
+            }).then((data) => {
+                navigate("/redirect")
             });
+
           }
           catch(e) {
             console.log(e)
@@ -229,8 +235,10 @@ export const SearchMenu = (props) => {
             <MealTab mealType="Dinner" foods={foodInfo[2]} food={foodInfo} setSelectedFoods={[selectedFoods, setSelectedFoods]} isEditAble={isEditAble}/>
         </div>}
         {
-            (props.mode == "edit" || props.mode == "edit-info") &&<button className="submit-button-f"onClick={
-            saveChoicesHandler
+            (props.mode == "edit" || props.mode == "edit-info") &&<button className="submit-button-f"onClick={(e) => {
+                e.target.disabled = true;
+                saveChoicesHandler();
+            }
         }>
             Save
         </button>}

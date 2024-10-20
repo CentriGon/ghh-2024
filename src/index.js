@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from './Routes/HomePage';
 import { LoginPage } from './Routes/LoginPage';
 import { Dashboard } from './Routes/Dashboard';
-
+import { Redirect } from './Components/Redirect';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -16,6 +16,7 @@ root.render(
       <Route path="/" element={<HomePage/>}/>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/redirect" element={<Redirect/>} />
     </Routes>
   </BrowserRouter>
 );

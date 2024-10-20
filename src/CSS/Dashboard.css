@@ -106,6 +106,10 @@
    
 }
 
+.cards > button:hover {
+    transform: scale(1.05);
+}
+
 
 .overlay {
     position: fixed;
@@ -113,6 +117,6 @@
     height: 100vh;
     background-color: #000000ad;
     display: flex;
-
+    z-index:1000;
     justify-content: center;
 }

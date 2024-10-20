@@ -11,8 +11,9 @@ export const Dashboard = () => {
 
     const [name, setName] = useState(null)
     const [menuIsOpen, setMenuIsOpen] = useState(false)
-    const [selectedInfo, setSelectedInfo] = useState([]);
+    const [selectedInfo, setSelectedInfo] = useState(null);
     const [fetchedResources, setFetchedResources] = useState([])
+    const [menuMode, setMenuMode] = useState("edit")
 
     const navigate = useNavigate()
 
@@ -54,7 +55,7 @@ export const Dashboard = () => {
                 <div className="overlay" onClick={(e) => {
                     e.stopPropagation()
                 }}>
-                    <SearchMenu mode={"edit"} selectedItems={null} setMenuIsOpen={setMenuIsOpen}/>
+                    <SearchMenu mode={menuMode} selectedItems={selectedInfo} setMenuIsOpen={setMenuIsOpen}/>
                 </div>
         )}
         <div className="top-nav-bar">
@@ -65,7 +66,7 @@ export const Dashboard = () => {
         <div className="main-section">
             <div className="cards">
                 {fetchedResources.map((item) => {
-                    return <DayCard date={item.date} diningHall={item.diningHall} calories={item.nutrient_values.calories} />
+                    return <DayCard date={item.date} setMenuMode={setMenuMode} setMenuIsOpen={setMenuIsOpen} setSelectedInfo={setSelectedInfo} diningHall={item.diningHall} fullInfo={item} calories={item.nutrient_values.calories} />
                 })}
                 <button onClick={
                     (e) => {
@@ -75,6 +76,8 @@ export const Dashboard = () => {
                         else {
                             e.target.classList.remove("let-hover")
                         }
+                        setMenuMode("edit")
+                        setSelectedInfo(null)
                         setMenuIsOpen(true)
                         console.log('clicked')
 
